@@ -38,7 +38,7 @@ while True:
         print('[\n학생별 성적]')
         for name, info in students.items():
             total_stud = sum(info.values())
-            avg = round(total_stud / len(info.keys()), 1)
+            avg = total_stud / len(info)
             avg_dict[name] = avg
             print(f"{name}: 총점 {total_stud}, 평균 {get_grade(avg)}")
             
@@ -57,16 +57,10 @@ while True:
         print(f'\n[최고 평균 과목]')
         
         most_sub = max(sub_dict, key=sub_dict.get)
-        print(f"{most_sub} : {round(sub_dict[most_sub]), 2}")
+        print(f"{most_sub} : {round(sub_dict[most_sub], 2)}")
         break
     name, sub, score = raw.split()
     score = int(score)
-    if name not in students:
-        students[name] = {sub : score}
-    else:
-        students[name][sub] = score
-        
-    if sub not in subjects:
-        subjects[sub] = {name : score}
-    else:
-        subjects[sub][name] = score
+    
+    students.setdefault(name, {})[sub] = score
+    subjects.setdefault(sub, {})[name] = score
