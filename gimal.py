@@ -19,9 +19,9 @@ else:
         if max_count < value:
             max_count = value
             
-    for i in range(6):
+    for i in range(1, 7):
         for key, value in counter.items():
-            if key == i + 1:
+            if key == i:
                 stars_count = (value/max_count) * 10
                 countingstars = "*" * int(stars_count)
                 percent = value / number * 100
